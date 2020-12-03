@@ -6,7 +6,12 @@ echo "buildMode: $buildMode"
 if [ "$buildMode" = "docker_singularity" ]; then
        echo "starting local docker build:"
        echo "---------------------------"
-       sudo docker build -t ${imageName}:$buildDate -f  ${imageName}.Dockerfile .
+       # sudo docker build -t ${imageName}:$buildDate -f  ${imageName}.Dockerfile .
+       # https://medium.com/@artur.klauser/building-multi-architecture-docker-images-with-buildx-27d80f7e2408
+       # https://github.com/gentoo/gentoo-docker-images/issues/98#issuecomment-735392789
+       export DOCKER_CLI_EXPERIMENTAL=enabled
+       docker buildx create --use --append --name insecure-builder4 --buildkitd-flags '--allow-insecure-entitlement security.insecure'
+       docker buildx build --allow security.insecure -t ${imageName}:$buildDate -f ${imageName}.Dockerfile .
 
        if [ "$testImageDocker" = "true" ]; then
               echo "tesing image in docker now:"

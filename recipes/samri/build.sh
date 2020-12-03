@@ -63,3 +63,7 @@ fi
    # --run="git checkout tags/${toolVersion} -b ${toolVersion}-branch" \
    # --run="cd SAMRI/.gentoo" \
    # --run="./install.sh" \
+
+
+# Use neurodocker to recreate?
+   # https://github.com/IBT-FMI/SAMRI/blob/master/.gentoo/sci-biology/samri/samri-99999.ebuild
