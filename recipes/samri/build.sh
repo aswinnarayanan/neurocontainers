@@ -12,7 +12,8 @@ fi
 
 source ../main_setup.sh
 
-echo "FROM gentoo/stage3" > ${toolName}_${toolVersion}.Dockerfile
+echo "# syntax=docker/dockerfile:experimental" > ${toolName}_${toolVersion}.Dockerfile
+echo "FROM gentoo/stage3" >> ${toolName}_${toolVersion}.Dockerfile
 # echo "RUN printf '#!/bin/bash\nls -la' > /usr/bin/ll" >> ${toolName}_${toolVersion}.Dockerfile
 # echo "RUN chmod +x /usr/bin/ll" >> ${toolName}_${toolVersion}.Dockerfile
 # echo "RUN mkdir ${mountPointList}" >> ${toolName}_${toolVersion}.Dockerfile

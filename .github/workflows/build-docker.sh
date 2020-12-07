@@ -25,14 +25,14 @@ docker buildx create --use --append --name insecure-builder --buildkitd-flags '-
 docker buildx build . --file ${IMAGENAME}.Dockerfile --allow security.insecure
 
 
-echo "[DEBUG] # Get image RootFS to check for changes ..."
-ROOTFS_NEW=$(docker inspect --format='{{.RootFS}}' $IMAGEID:$SHORT_SHA)
+# echo "[DEBUG] # Get image RootFS to check for changes ..."
+# ROOTFS_NEW=$(docker inspect --format='{{.RootFS}}' $IMAGEID:$SHORT_SHA)
 
 # Tag and Push if new image RootFS differs from cached image
-if [ "$ROOTFS_NEW" = "$ROOTFS_CACHE" ]; then
-    echo "[DEBUG] Skipping push to registry. No changes found"
-else
-    echo "[DEBUG] Pushing to registry. Changes found"
+# if [ "$ROOTFS_NEW" = "$ROOTFS_CACHE" ]; then
+#     echo "[DEBUG] Skipping push to registry. No changes found"
+# else
+#     echo "[DEBUG] Pushing to registry. Changes found"
 
 if [ "$GITHUB_REF" == "refs/heads/master" ]; then
     # Push to GH Packages
