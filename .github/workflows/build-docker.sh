@@ -21,7 +21,8 @@ echo "[DEBUG] Docker build ..."
 # docker build . --file ${IMAGENAME}.Dockerfile --tag $IMAGEID:$SHORT_SHA --cache-from $IMAGEID --label "GITHUB_REPOSITORY=$GITHUB_REPOSITORY" --label "GITHUB_SHA=$GITHUB_SHA"
 export DOCKER_CLI_EXPERIMENTAL=enabled
 docker buildx create --use --append --name insecure-builder --buildkitd-flags '--allow-insecure-entitlement security.insecure'
-docker buildx build . --file ${IMAGENAME}.Dockerfile --tag $IMAGEID:$SHORT_SHA --cache-from $IMAGEID --label "GITHUB_REPOSITORY=$GITHUB_REPOSITORY" --label "GITHUB_SHA=$GITHUB_SHA" --allow security.insecure -o type=registry
+# docker buildx build . --file ${IMAGENAME}.Dockerfile --tag $IMAGEID:$SHORT_SHA --cache-from $IMAGEID --label "GITHUB_REPOSITORY=$GITHUB_REPOSITORY" --label "GITHUB_SHA=$GITHUB_SHA" --allow security.insecure -o type=registry
+docker buildx build . --file ${IMAGENAME}.Dockerfile --tag $IMAGEID:$SHORT_SHA --label "GITHUB_REPOSITORY=$GITHUB_REPOSITORY" --label "GITHUB_SHA=$GITHUB_SHA" --allow security.insecure -o type=registry
 
 
 

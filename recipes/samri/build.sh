@@ -27,7 +27,7 @@ echo "RUN emaint sync --repo science" >> ${toolName}_${toolVersion}.Dockerfile
 echo "RUN echo 'ACCEPT_KEYWORDS=\"~amd64\"' >> /etc/portage/make.conf" >> ${toolName}_${toolVersion}.Dockerfile
 # echo "RUN  emerge --sync" >> ${toolName}_${toolVersion}.Dockerfile
 # echo "RUN  emerge -vDNu world" >> ${toolName}_${toolVersion}.Dockerfile
-echo "RUN emerge samri --autounmask-continue" >> ${toolName}_${toolVersion}.Dockerfile
+echo "RUN USE='python_targets_python3_7' emerge samri --autounmask-continue" >> ${toolName}_${toolVersion}.Dockerfile
 
 
 
