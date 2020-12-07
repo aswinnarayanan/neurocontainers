@@ -48,5 +48,4 @@ if [ "$GITHUB_REF" == "refs/heads/master" ]; then
       docker push $DOCKERHUB_ORG/${IMAGENAME}:${BUILDDATE}
       docker push $DOCKERHUB_ORG/$IMAGENAME:latest
     fi
-  fi
 fi
