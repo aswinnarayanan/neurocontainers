@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 echo "[DEBUG] recipes/$APPLICATION"
 cd recipes/$APPLICATION
