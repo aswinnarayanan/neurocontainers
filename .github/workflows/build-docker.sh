@@ -10,17 +10,18 @@ IMAGEID="$REGISTRY/$IMAGENAME"
 echo "[DEBUG] IMAGENAME: $IMAGENAME"
 echo "[DEBUG] REGISTRY: $REGISTRY"
 echo "[DEBUG] IMAGEID: $IMAGEID"
+echo "[DEBUG] BUILDDATE: $BUILDDATE"
 
-echo "[DEBUG] Pulling $IMAGEID"
-{
-  docker pull $IMAGEID \
-    && ROOTFS_CACHE=$(docker inspect --format='{{.RootFS}}' $IMAGEID)
-} || echo "$IMAGEID not found. Resuming build..."
+# echo "[DEBUG] Pulling $IMAGEID"
+# {
+#   docker pull $IMAGEID \
+#     && ROOTFS_CACHE=$(docker inspect --format='{{.RootFS}}' $IMAGEID)
+# } || echo "$IMAGEID not found. Resuming build..."
 
 echo "[DEBUG] Docker build ..."
 # docker build . --file ${IMAGENAME}.Dockerfile --tag $IMAGEID:$SHORT_SHA --cache-from $IMAGEID --label "GITHUB_REPOSITORY=$GITHUB_REPOSITORY" --label "GITHUB_SHA=$GITHUB_SHA"
 export DOCKER_CLI_EXPERIMENTAL=enabled
-docker buildx create --use --append --name insecure-builder --buildkitd-flags '--allow-insecure-entitlement security.insecure'
+docker buildx create --use --name insecure-builder --buildkitd-flags '--allow-insecure-entitlement security.insecure'
 # docker buildx build . --file ${IMAGENAME}.Dockerfile --tag $IMAGEID:$SHORT_SHA --cache-from $IMAGEID --label "GITHUB_REPOSITORY=$GITHUB_REPOSITORY" --label "GITHUB_SHA=$GITHUB_SHA" --allow security.insecure -o type=registry
 docker buildx build . --file ${IMAGENAME}.Dockerfile --allow security.insecure
 
