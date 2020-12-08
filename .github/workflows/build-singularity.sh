@@ -1,3 +1,4 @@
+set -e
 
 if curl --output /dev/null --silent --head --fail "https://swift.rc.nectar.org.au:8888/v1/AUTH_d6165cc7b52841659ce8644df1884d5e/singularityImages/${IMAGENAMENAME}_${BUILDDATE}.sif"; then
     echo "${IMAGENAME}_${BUILDDATE}.sif exists"
@@ -26,8 +27,11 @@ else
     export OS_REGION_NAME="Melbourne"
 
     echo "[DEBUG] Attempting upload to swift ..."
-    if [ "$GITHUB_REF" == "refs/heads/master" ]; then
+    # if [ "$GITHUB_REF" == "refs/heads/master" ]; then
         cd $HOME
         swift upload singularityImages ${IMAGENAME}_${BUILDDATE}.sif --segment-size 1073741824
-    fi
+    # else 
+        # echo "[DEBUG] Not uploaded to swift because not in master branch ..."
+    # fi
+    
 fi
