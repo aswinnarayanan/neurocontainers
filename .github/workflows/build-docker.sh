@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e 
 
 echo "[DEBUG] recipes/$APPLICATION"
 cd recipes/$APPLICATION
@@ -28,7 +29,7 @@ if [ "$ROOTFS_NEW" = "$ROOTFS_CACHE" ]; then
 else
     echo "[DEBUG] Pushing to registry. Changes found"
 
-if [ "$GITHUB_REF" == "refs/heads/master" ]; then
+# if [ "$GITHUB_REF" == "refs/heads/master" ]; then
     # Push to GH Packages
     docker tag $IMAGEID:$SHORT_SHA $IMAGEID:$BUILDDATE
     docker tag $IMAGEID:$SHORT_SHA $IMAGEID:latest
@@ -43,4 +44,4 @@ if [ "$GITHUB_REF" == "refs/heads/master" ]; then
       docker push $DOCKERHUB_ORG/$IMAGENAME:latest
     fi
   fi
-fi
+# fi
