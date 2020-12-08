@@ -16,7 +16,8 @@ neurodocker generate ${neurodocker_buildMode} \
    --pkg-manager apt \
    --run="printf '#!/bin/bash\nls -la' > /usr/bin/ll" \
    --run="chmod +x /usr/bin/ll" \
-   --run="mkdir ${mountPointList}" \
+   --run="mkdir -p ${mountPointList}" \
+   --run="toch /etc/resolv.conf" \
    --run="curl -o /example_data.zip https://www.nitrc.org/frs/download.php/750/MRI-crop.zip " \
    --run="unzip /example_data.zip" \
    --${toolName} version=${toolVersion} \
