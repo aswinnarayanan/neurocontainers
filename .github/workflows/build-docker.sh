@@ -34,7 +34,7 @@ docker buildx build . --file ${IMAGENAME}.Dockerfile --allow security.insecure
 # else
 #     echo "[DEBUG] Pushing to registry. Changes found"
 
-if [ "$GITHUB_REF" == "refs/heads/master" ]; then
+# if [ "$GITHUB_REF" == "refs/heads/master" ]; then
     # Push to GH Packages
     docker tag $IMAGEID:$SHORT_SHA $IMAGEID:$BUILDDATE
     docker tag $IMAGEID:$SHORT_SHA $IMAGEID:latest
@@ -48,4 +48,4 @@ if [ "$GITHUB_REF" == "refs/heads/master" ]; then
       docker push $DOCKERHUB_ORG/${IMAGENAME}:${BUILDDATE}
       docker push $DOCKERHUB_ORG/$IMAGENAME:latest
     fi
-fi
+# fi
