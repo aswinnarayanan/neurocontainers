@@ -20,12 +20,12 @@ neurodocker generate ${neurodocker_buildMode} \
    --run="chmod +x /usr/bin/ll" \
    --run="mkdir ${mountPointList}" \
    --install openjdk-8-jre curl ca-certificates unzip \
-   --matlabmcr version=2020a install_path=/opt/MCRv98 method=binaries  \
+   --matlabmcr version=2020a install_path=/opt/MCR  \
    --workdir /opt/${toolName}-${toolVersion}/ \
    --copy eeglab2020.0_mcr2020a.tar.gz /opt/${toolName}-${toolVersion}.tar.gz \
    --run="tar -xzf /opt/${toolName}-${toolVersion}.tar.gz -C /opt/${toolName}-${toolVersion}/ --strip-components 1" \
-   --env LD_LIBRARY_PATH="/usr/lib/x86_64-linux-gnu:/opt/MCRv98/v98/runtime/glnxa64:/opt/MCRv98/v98/bin/glnxa64:/opt/MCRv98/v98/sys/os/glnxa64:/opt/MCRv98/v98/sys/opengl/lib/glnxa64" \
-   --env XAPPLRESDIR=/opt/MCRv98/v98/x11/app-defaults \
+   --env LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:/opt/MCR/v98/runtime/glnxa64:/opt/MCR/v98/bin/glnxa64:/opt/MCR/v98/sys/os/glnxa64:/opt/MCR/v98/sys/opengl/lib/glnxa64 \
+   --env XAPPLRESDIR=/opt/MCR/v98/x11/app-defaults \
    --env PATH=/opt/${toolName}-${toolVersion}/:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
    --env DEPLOY_BINS=${toolName} \
    --copy README.md /README.md \
@@ -35,6 +35,6 @@ if [ "$debug" = "true" ]; then
    ./../main_build.sh
 fi
 
-#Once you have compiled archive in object storage:
-#--run="curl -fsSL --retry 5 https://objectstorage.us-ashburn-1.oraclecloud.com/eeglab2020.0_mcr2020a.tar.gz \
+#Once you have final compiled archive in object storage:
+#--run="curl -fsSL --retry 5 https://objectstorage.us-ashburn-1.oraclecloud.com/<INSERT_ADDRESS>/eeglab2020.0_mcr2020a.tar.gz \
 #      | tar -xz -C /opt/${toolName}-${toolVersion}/ --strip-components 1" \
