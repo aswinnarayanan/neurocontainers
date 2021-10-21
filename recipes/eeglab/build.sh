@@ -19,22 +19,17 @@ neurodocker generate ${neurodocker_buildMode} \
    --run="printf '#!/bin/bash\nls -la' > /usr/bin/ll" \
    --run="chmod +x /usr/bin/ll" \
    --run="mkdir ${mountPointList}" \
-   --install openjdk-8-jre curl ca-certificates unzip \
+   --install curl unzip ca-certificates openjdk-8-jre dbus-x11 \
    --matlabmcr version=2020a install_path=/opt/MCR  \
    --workdir /opt/${toolName}-${toolVersion}/ \
-   --copy eeglab2020.0_mcr2020a.tar.gz /opt/${toolName}-${toolVersion}.tar.gz \
-   --run="tar -xzf /opt/${toolName}-${toolVersion}.tar.gz -C /opt/${toolName}-${toolVersion}/ --strip-components 1" \
-   --env LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:/opt/MCR/v98/runtime/glnxa64:/opt/MCR/v98/bin/glnxa64:/opt/MCR/v98/sys/os/glnxa64:/opt/MCR/v98/sys/opengl/lib/glnxa64 \
+   --run="curl -fsSL --retry 5 https://objectstorage.us-ashburn-1.oraclecloud.com/p/b_NtFg0a37NZ-3nJfcTk_LSCadJUyN7IkhhVDB7pv8GGQ2e0brg8kYUnAwFfYb6N/n/sd63xuke79z3/b/neurodesk/o/eeglab2020.0_mcr2020a.tar.gz \
+      | tar -xz -C /opt/${toolName}-${toolVersion}/ --strip-components 1" \
    --env XAPPLRESDIR=/opt/MCR/v98/x11/app-defaults \
    --env PATH=/opt/${toolName}-${toolVersion}/:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
-   --env DEPLOY_BINS=${toolName} \
+   --env DEPLOY_BINS=EEGLAB \
    --copy README.md /README.md \
   > ${imageName}.${neurodocker_buildExt}
 
 if [ "$debug" = "true" ]; then
    ./../main_build.sh
 fi
-
-#Once you have final compiled archive in object storage:
-#--run="curl -fsSL --retry 5 https://objectstorage.us-ashburn-1.oraclecloud.com/<INSERT_ADDRESS>/eeglab2020.0_mcr2020a.tar.gz \
-#      | tar -xz -C /opt/${toolName}-${toolVersion}/ --strip-components 1" \

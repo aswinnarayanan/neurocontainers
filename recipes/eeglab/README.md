@@ -5,7 +5,7 @@ Standalone (compiled) version of EEGLAB GUI with MATLAB runtime
 
 Example:
 ```
-eeglab
+EEGLAB
 ```
 
 More documentation can be found here: https://eeglab.org/tutorials/
