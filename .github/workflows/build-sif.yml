@@ -1,4 +1,4 @@
-name: manual-build
+name: build-sif
 
 on:
   workflow_dispatch:
