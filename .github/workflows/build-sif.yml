@@ -26,8 +26,8 @@ jobs:
           apptainer-version: 1.3.1
       - name: Run an apptainer container
         run: |
-          CONTAINERNAME=${{ github.event.inputs.applications }}_${{ github.event.inputs.version }}
-          BUILDDATE=${{ github.event.inputs.applications }}
+          CONTAINERNAME=${{ github.event.inputs.application }}_${{ github.event.inputs.version }}
+          BUILDDATE=${{ github.event.inputs.builddate }}
           apptainer registry login --username ${{ github.repository_owner }} --password ${{ secrets.GITHUB_TOKEN }} oras://ghcr.io
           apptainer pull docker://ghcr.io/neurodesk/${CONTAINERNAME}:${BUILDDATE}
           apptainer push ./${CONTAINERNAME}_${BUILDDATE}.sif oras://ghcr.io/${{ github.repository_owner }}/sif/${CONTAINERNAME}:${BUILDDATE}
