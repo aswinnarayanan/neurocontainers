@@ -14,6 +14,6 @@ jobs:
       - name: Run an apptainer container
         run: |
           apptainer registry login --username ${{ github.repository_owner }} --password ${{ secrets.GITHUB_TOKEN }} oras://ghcr.io
-          apptainer pull docker://ghcr.io/neurodesk/template_1.0:20231214
-          apptainer push ./template_1.0_20231214.sif oras://ghcr.io/${{ github.repository_owner }}/sif/template_1.0:20231214
+          apptainer pull docker://ghcr.io/neurodesk/itksnap_4.0.2:20240117
+          apptainer push ./itksnap_4.0.2_20240117.sif oras://ghcr.io/${{ github.repository_owner }}/sif/itksnap_4.0.2:20240117
           
