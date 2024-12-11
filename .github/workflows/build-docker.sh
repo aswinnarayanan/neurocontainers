@@ -98,22 +98,22 @@ if [ -f "${IMAGENAME}_${BUILDDATE}.tar" ]; then
   rm -rf ${IMAGENAME}_${BUILDDATE}.tar
 fi
 
-echo "[DEBUG] Attempting upload to Nectar Object Storage ..."
-rclone copy --progress $IMAGE_HOME/${IMAGENAME}_${BUILDDATE}.simg nectar:/neurodesk/temporary-builds-new
+# echo "[DEBUG] Attempting upload to Nectar Object Storage ..."
+# rclone copy --progress $IMAGE_HOME/${IMAGENAME}_${BUILDDATE}.simg nectar:/neurodesk/temporary-builds-new
 
-echo "[DEBUG] Attempting upload to AWS Object Storage ..."
-rclone copy --progress $IMAGE_HOME/${IMAGENAME}_${BUILDDATE}.simg aws-neurocontainers:/neurocontainers/temporary-builds-new
+# echo "[DEBUG] Attempting upload to AWS Object Storage ..."
+# rclone copy --progress $IMAGE_HOME/${IMAGENAME}_${BUILDDATE}.simg aws-neurocontainers:/neurocontainers/temporary-builds-new
 
-if curl --output /dev/null --silent --head --fail "https://object-store.rc.nectar.org.au/v1/AUTH_dead991e1fa847e3afcca2d3a7041f5d/neurodesk/temporary-builds-new/${IMAGENAME}_${BUILDDATE}.simg"; then
-    echo "[DEBUG] ${IMAGENAME}_${BUILDDATE}.simg was freshly build and exists now :)"
-    echo "[DEBUG] cleaning up $IMAGE_HOME/${IMAGENAME}_${BUILDDATE}.simg"
-    rm -rf $IMAGE_HOME/${IMAGENAME}_${BUILDDATE}.simg
-else
-    echo "[ERROR] ${IMAGENAME}_${BUILDDATE}.simg does not exist yet. Something is WRONG"
-    echo "[ERROR] cleaning up $IMAGE_HOME/${IMAGENAME}_${BUILDDATE}.simg"
-    rm -rf $IMAGE_HOME/${IMAGENAME}_${BUILDDATE}.simg
-    exit 2
-fi
+# if curl --output /dev/null --silent --head --fail "https://object-store.rc.nectar.org.au/v1/AUTH_dead991e1fa847e3afcca2d3a7041f5d/neurodesk/temporary-builds-new/${IMAGENAME}_${BUILDDATE}.simg"; then
+#     echo "[DEBUG] ${IMAGENAME}_${BUILDDATE}.simg was freshly build and exists now :)"
+#     echo "[DEBUG] cleaning up $IMAGE_HOME/${IMAGENAME}_${BUILDDATE}.simg"
+#     rm -rf $IMAGE_HOME/${IMAGENAME}_${BUILDDATE}.simg
+# else
+#     echo "[ERROR] ${IMAGENAME}_${BUILDDATE}.simg does not exist yet. Something is WRONG"
+#     echo "[ERROR] cleaning up $IMAGE_HOME/${IMAGENAME}_${BUILDDATE}.simg"
+#     rm -rf $IMAGE_HOME/${IMAGENAME}_${BUILDDATE}.simg
+#     exit 2
+# fi
 
 
 if [ "$GITHUB_REF" == "refs/heads/master" ]; then
