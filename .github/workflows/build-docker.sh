@@ -124,9 +124,9 @@ if [ "$GITHUB_REF" == "refs/heads/master" ]; then
     if [ -n "$GH_REGISTRY" ]; then
       echo "[DEBUG] Pushing to GitHub Registry $GH_REGISTRY"
     # Push to GH Packages
-      docker tag $IMAGEID:$SHORT_SHA $IMAGEID:$BUILDDATE
+      docker tag $IMAGEID:$SHORT_SHA $IMAGEID:$APPVERSION-$BUILDDATE
       docker tag $IMAGEID:$SHORT_SHA $IMAGEID:latest
-      docker push $IMAGEID:$BUILDDATE
+      docker push $IMAGEID:$APPVERSION-$BUILDDATE
       docker push $IMAGEID:latest
     else
       echo "[DEBUG] Skipping push to GitHub Registry. secrets.GH_REGISTRY not found"
