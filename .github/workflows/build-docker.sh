@@ -31,7 +31,7 @@ BUILDDATETIME=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
 echo "[DEBUG] Docker build ..."
 # docker build . --file ${IMAGENAME}.Dockerfile --tag $IMAGEID:$SHORT_SHA --cache-from $IMAGEID --label "GITHUB_REPOSITORY=$GITHUB_REPOSITORY" --label "GITHUB_SHA=$GITHUB_SHA"
 docker build . --file ${IMAGENAME}.Dockerfile --tag $IMAGEID:$SHORT_SHA --cache-from $IMAGEID \
-    --label org.opencontainers.image.created=${BUILDDATETIME}} \
+    --label org.opencontainers.image.created=${BUILDDATETIME} \
     --label org.opencontainers.image.authors="mail.neurodesk@gmail.com" \
     --label org.opencontainers.image.url="https://www.neurodesk.org" \
     --label org.opencontainers.image.documentation="https://www.neurodesk.org" \
