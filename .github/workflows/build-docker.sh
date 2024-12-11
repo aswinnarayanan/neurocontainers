@@ -5,15 +5,19 @@ echo "[DEBUG] recipes/$APPLICATION"
 cd recipes/$APPLICATION
 
 IMAGENAME=$1
+APPVERSION="${1##*_}"
+IMAGEID=ghcr.io/$GITHUB_REPOSITORY/$APPNAME
+# if [ -n "$GH_REGISTRY" ]; then
+#   DOCKER_REGISTRY=$GH_REGISTRY
+# else
+#   DOCKER_REGISTRY=$(echo "$GITHUB_REPOSITORY" | awk -F / '{print $1}')
+# fi
+# REGISTRY=$(echo ghcr.io/$DOCKER_REGISTRY | tr '[A-Z]' '[a-z]')
+# IMAGEID="$REGISTRY/$IMAGENAME"
 
-if [ -n "$GH_REGISTRY" ]; then
-  DOCKER_REGISTRY=$GH_REGISTRY
-else
-  DOCKER_REGISTRY=$(echo "$GITHUB_REPOSITORY" | awk -F / '{print $1}')
-fi
-REGISTRY=$(echo ghcr.io/$DOCKER_REGISTRY | tr '[A-Z]' '[a-z]')
-IMAGEID="$REGISTRY/$IMAGENAME"
 echo "[DEBUG] IMAGENAME: $IMAGENAME"
+echo "[DEBUG] APPLICATION: $APPLICATION"
+echo "[DEBUG] APPVERSION: $APPVERSION"
 echo "[DEBUG] REGISTRY: $REGISTRY"
 echo "[DEBUG] IMAGEID: $IMAGEID"
 
@@ -31,8 +35,8 @@ docker build . --file ${IMAGENAME}.Dockerfile --tag $IMAGEID:$SHORT_SHA --cache-
     --label org.opencontainers.image.authors="mail.neurodesk@gmail.com" \
     --label org.opencontainers.image.url="https://www.neurodesk.org" \
     --label org.opencontainers.image.documentation="https://www.neurodesk.org" \
-    --label org.opencontainers.image.source="${gitUrl}" \
-    --label org.opencontainers.image.version="${IMAGENAME}-${BUILDDATE}" \
+    --label org.opencontainers.image.source="https://github.com/NeuroDesk/neurocontainers.git" \
+    --label org.opencontainers.image.version="${APPVERSION}-${BUILDDATE}" \
     --label org.opencontainers.image.revision="${SHORT_SHA}" \
     --label org.opencontainers.image.vendor="Neurodesk" \
     --label org.opencontainers.image.licenses="${APPLICATION} License" \
@@ -127,16 +131,16 @@ if [ "$GITHUB_REF" == "refs/heads/master" ]; then
     else
       echo "[DEBUG] Skipping push to GitHub Registry. secrets.GH_REGISTRY not found"
     fi
-    # Push to Dockerhub
-    if [ -n "$DOCKERHUB_ORG" ]; then
-      echo "[DEBUG] Pushing to Dockerhub Registry $DOCKERHUB_ORG"
-      docker tag $IMAGEID:$SHORT_SHA $DOCKERHUB_ORG/$IMAGENAME:$BUILDDATE
-      docker tag $IMAGEID:$SHORT_SHA $DOCKERHUB_ORG/$IMAGENAME:latest
-      docker push $DOCKERHUB_ORG/${IMAGENAME}:${BUILDDATE}
-      docker push $DOCKERHUB_ORG/$IMAGENAME:latest
-    else
-      echo "[DEBUG] Skipping push to Dockerhub Registry. secrets.DOCKERHUB_ORG not found"
-    fi
+    # # Push to Dockerhub
+    # if [ -n "$DOCKERHUB_ORG" ]; then
+    #   echo "[DEBUG] Pushing to Dockerhub Registry $DOCKERHUB_ORG"
+    #   docker tag $IMAGEID:$SHORT_SHA $DOCKERHUB_ORG/$IMAGENAME:$BUILDDATE
+    #   docker tag $IMAGEID:$SHORT_SHA $DOCKERHUB_ORG/$IMAGENAME:latest
+    #   docker push $DOCKERHUB_ORG/${IMAGENAME}:${BUILDDATE}
+    #   docker push $DOCKERHUB_ORG/$IMAGENAME:latest
+    # else
+    #   echo "[DEBUG] Skipping push to Dockerhub Registry. secrets.DOCKERHUB_ORG not found"
+    # fi
 else
     echo "[DEBUG] Skipping push to registry. Not on master branch"
 fi
