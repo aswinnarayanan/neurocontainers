@@ -65,14 +65,14 @@ fi
 #   sudo rm /var/lib/dpkg/lock*
 # fi
 
-# # install apptainer if no singularity executable is available
-# if ! command -v singularity &> /dev/null
-# then
-#     sudo apt-get install -y software-properties-common
-#     sudo add-apt-repository -y ppa:apptainer/ppa
-#     sudo apt-get update
-#     sudo apt-get install -y apptainer 
-# fi
+# install apptainer if no singularity executable is available
+if ! command -v singularity &> /dev/null
+then
+    sudo apt-get install -y software-properties-common
+    sudo add-apt-repository -y ppa:apptainer/ppa
+    sudo apt-get update
+    sudo apt-get install -y apptainer 
+fi
 
 
 # export IMAGE_HOME="/storage/tmp"
@@ -128,6 +128,10 @@ if [ "$GITHUB_REF" == "refs/heads/master" ]; then
       docker tag $IMAGEID:$SHORT_SHA $IMAGEID:latest
       docker push $IMAGEID:$APPVERSION-$BUILDDATE
       docker push $IMAGEID:latest
+
+      apptainer pull --force docker://$IMAGEID:$APPVERSION-$BUILDDATE
+      apptainer push ./${APPLICATION}_${APPVERSION}-${BUILDDATE}.sif oras://$IMAGEID:$APPVERSION-$BUILDDATE-sif
+
     else
       echo "[DEBUG] Skipping push to GitHub Registry. secrets.GH_REGISTRY not found"
     fi
