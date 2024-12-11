@@ -6,7 +6,7 @@ cd recipes/$APPLICATION
 
 IMAGENAME=$1
 APPVERSION="${1##*_}"
-IMAGEID=ghcr.io/aswinnarayanan/$APPNAME
+IMAGEID=ghcr.io/aswinnarayanan/$APPLICATION
 # if [ -n "$GH_REGISTRY" ]; then
 #   DOCKER_REGISTRY=$GH_REGISTRY
 # else
