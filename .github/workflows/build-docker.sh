@@ -23,8 +23,24 @@ echo "[DEBUG] Pulling $IMAGEID"
     && ROOTFS_CACHE=$(docker inspect --format='{{.RootFS}}' $IMAGEID)
 } || echo "$IMAGEID not found. Resuming build..."
 
+BUILDDATETIME=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
 echo "[DEBUG] Docker build ..."
-docker build . --file ${IMAGENAME}.Dockerfile --tag $IMAGEID:$SHORT_SHA --cache-from $IMAGEID --label "GITHUB_REPOSITORY=$GITHUB_REPOSITORY" --label "GITHUB_SHA=$GITHUB_SHA"
+# docker build . --file ${IMAGENAME}.Dockerfile --tag $IMAGEID:$SHORT_SHA --cache-from $IMAGEID --label "GITHUB_REPOSITORY=$GITHUB_REPOSITORY" --label "GITHUB_SHA=$GITHUB_SHA"
+docker build . --file ${IMAGENAME}.Dockerfile --tag $IMAGEID:$SHORT_SHA --cache-from $IMAGEID \
+    --label org.opencontainers.image.created=${BUILDDATETIME}} \
+    --label org.opencontainers.image.authors="mail.neurodesk@gmail.com" \
+    --label org.opencontainers.image.url="https://www.neurodesk.org" \
+    --label org.opencontainers.image.documentation="https://www.neurodesk.org" \
+    --label org.opencontainers.image.source="${gitUrl}" \
+    --label org.opencontainers.image.version="${IMAGENAME}-${BUILDDATE}" \
+    --label org.opencontainers.image.revision="${SHORT_SHA}" \
+    --label org.opencontainers.image.vendor="Neurodesk" \
+    --label org.opencontainers.image.licenses="${APPLICATION} License" \
+    --label org.opencontainers.image.ref.name="${APPLICATION}" \
+    --label org.opencontainers.image.title="${APPLICATION}" \
+    --label org.opencontainers.image.description="${APPLICATION} Description" \
+    --label org.opencontainers.image.base.digest="sha256:3d1556a8a18cf5307b121e0a98e93f1ddf1f3f8e092f1fddfd941254785b95d7" \
+    --label org.opencontainers.image.base.name="ubuntu:22.04" \
 
 echo "[DEBUG] # Get image RootFS to check for changes ..."
 ROOTFS_NEW=$(docker inspect --format='{{.RootFS}}' $IMAGEID:$SHORT_SHA)
@@ -82,22 +98,22 @@ if [ -f "${IMAGENAME}_${BUILDDATE}.tar" ]; then
   rm -rf ${IMAGENAME}_${BUILDDATE}.tar
 fi
 
-echo "[DEBUG] Attempting upload to Nectar Object Storage ..."
-rclone copy --progress $IMAGE_HOME/${IMAGENAME}_${BUILDDATE}.simg nectar:/neurodesk/temporary-builds-new
+# echo "[DEBUG] Attempting upload to Nectar Object Storage ..."
+# rclone copy --progress $IMAGE_HOME/${IMAGENAME}_${BUILDDATE}.simg nectar:/neurodesk/temporary-builds-new
 
-echo "[DEBUG] Attempting upload to AWS Object Storage ..."
-rclone copy --progress $IMAGE_HOME/${IMAGENAME}_${BUILDDATE}.simg aws-neurocontainers:/neurocontainers/temporary-builds-new
+# echo "[DEBUG] Attempting upload to AWS Object Storage ..."
+# rclone copy --progress $IMAGE_HOME/${IMAGENAME}_${BUILDDATE}.simg aws-neurocontainers:/neurocontainers/temporary-builds-new
 
-if curl --output /dev/null --silent --head --fail "https://object-store.rc.nectar.org.au/v1/AUTH_dead991e1fa847e3afcca2d3a7041f5d/neurodesk/temporary-builds-new/${IMAGENAME}_${BUILDDATE}.simg"; then
-    echo "[DEBUG] ${IMAGENAME}_${BUILDDATE}.simg was freshly build and exists now :)"
-    echo "[DEBUG] cleaning up $IMAGE_HOME/${IMAGENAME}_${BUILDDATE}.simg"
-    rm -rf $IMAGE_HOME/${IMAGENAME}_${BUILDDATE}.simg
-else
-    echo "[ERROR] ${IMAGENAME}_${BUILDDATE}.simg does not exist yet. Something is WRONG"
-    echo "[ERROR] cleaning up $IMAGE_HOME/${IMAGENAME}_${BUILDDATE}.simg"
-    rm -rf $IMAGE_HOME/${IMAGENAME}_${BUILDDATE}.simg
-    exit 2
-fi
+# if curl --output /dev/null --silent --head --fail "https://object-store.rc.nectar.org.au/v1/AUTH_dead991e1fa847e3afcca2d3a7041f5d/neurodesk/temporary-builds-new/${IMAGENAME}_${BUILDDATE}.simg"; then
+#     echo "[DEBUG] ${IMAGENAME}_${BUILDDATE}.simg was freshly build and exists now :)"
+#     echo "[DEBUG] cleaning up $IMAGE_HOME/${IMAGENAME}_${BUILDDATE}.simg"
+#     rm -rf $IMAGE_HOME/${IMAGENAME}_${BUILDDATE}.simg
+# else
+#     echo "[ERROR] ${IMAGENAME}_${BUILDDATE}.simg does not exist yet. Something is WRONG"
+#     echo "[ERROR] cleaning up $IMAGE_HOME/${IMAGENAME}_${BUILDDATE}.simg"
+#     rm -rf $IMAGE_HOME/${IMAGENAME}_${BUILDDATE}.simg
+#     exit 2
+# fi
 
 
 if [ "$GITHUB_REF" == "refs/heads/master" ]; then
