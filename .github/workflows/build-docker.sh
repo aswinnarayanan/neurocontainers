@@ -23,8 +23,24 @@ echo "[DEBUG] Pulling $IMAGEID"
     && ROOTFS_CACHE=$(docker inspect --format='{{.RootFS}}' $IMAGEID)
 } || echo "$IMAGEID not found. Resuming build..."
 
+BUILDDATETIME=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
 echo "[DEBUG] Docker build ..."
-docker build . --file ${IMAGENAME}.Dockerfile --tag $IMAGEID:$SHORT_SHA --cache-from $IMAGEID --label "GITHUB_REPOSITORY=$GITHUB_REPOSITORY" --label "GITHUB_SHA=$GITHUB_SHA"
+# docker build . --file ${IMAGENAME}.Dockerfile --tag $IMAGEID:$SHORT_SHA --cache-from $IMAGEID --label "GITHUB_REPOSITORY=$GITHUB_REPOSITORY" --label "GITHUB_SHA=$GITHUB_SHA"
+docker build . --tag $IMAGEID:$SHORT_SHA --cache-from $IMAGEID \
+    --label org.opencontainers.image.created=${BUILDDATETIME}} \
+    --label org.opencontainers.image.authors="mail.neurodesk@gmail.com" \
+    --label org.opencontainers.image.url="https://www.neurodesk.org" \
+    --label org.opencontainers.image.documentation="https://www.neurodesk.org" \
+    --label org.opencontainers.image.source="${gitUrl}" \
+    --label org.opencontainers.image.version="${IMAGENAME}-${BUILDDATE}" \
+    --label org.opencontainers.image.revision="${SHORT_SHA}" \
+    --label org.opencontainers.image.vendor="Neurodesk" \
+    --label org.opencontainers.image.licenses="${APPLICATION} License" \
+    --label org.opencontainers.image.ref.name="${APPLICATION}" \
+    --label org.opencontainers.image.title="${APPLICATION}" \
+    --label org.opencontainers.image.description="${APPLICATION} Description" \
+    --label org.opencontainers.image.base.digest="sha256:3d1556a8a18cf5307b121e0a98e93f1ddf1f3f8e092f1fddfd941254785b95d7" \
+    --label org.opencontainers.image.base.name="ubuntu:22.04" \
 
 echo "[DEBUG] # Get image RootFS to check for changes ..."
 ROOTFS_NEW=$(docker inspect --format='{{.RootFS}}' $IMAGEID:$SHORT_SHA)
