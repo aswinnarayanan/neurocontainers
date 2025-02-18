@@ -7,7 +7,11 @@ _Information on the **Neurodesk** project is available at [neurodesk.org](https:
 _Information on **Neurocontainers** is available at [neurodesk.org/docs/neurocontainers](https://www.neurodesk.org/docs/getting-started/neurocontainers/)_
 
 # Docker images
-`docker pull ghcr.io/aswinnarayanan/itksnap:4.0.2-20241211`
+```
+docker pull ghcr.io/aswinnarayanan/itksnap:4.0.2-latest
+```
 
 # SIF images
-`apptainer pull ghcr.io/aswinnarayanan/itksnap:4.0.2-20241211-sif`
+```
+apptainer pull ghcr.io/aswinnarayanan/itksnap:4.0.2-latest-sif
+```
