@@ -1,0 +1,11 @@
+{
+  "apps": {
+    "datalad 1.1.5": {
+      "version": "20250707",
+      "exec": ""
+    }
+  },
+  "categories": [
+    "other"
+  ]
+}
