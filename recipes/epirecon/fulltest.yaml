@@ -2,7 +2,7 @@
 # Focused verification for the OpenRecon runtime and Cartesian EPI FFT reconstruction.
 
 name: epirecon
-version: 0.0.4
+version: "0.1.0"
 twixtools_version: "0.24"
 
 test_data:
