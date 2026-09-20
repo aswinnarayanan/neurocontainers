@@ -1,10 +1,10 @@
 variables:
   model_commit: ea055aec0f55baa15d984c4fe92035aaa21c7b5c
-  hdbet_commit: ae160681324d524db3578e4135bf781f8206e146
+  hdbet_commit: "678e44d546a84de0f2a7fc245f176b82b7d912fd"
   nnunetv2_version: 2.8.1
 
 name: flames
-version: 1.0.0
+version: "1.1.0"
 copyright:
   - license: GPL-3.0
     url: https://huggingface.co/spaces/FrancescoLR/FLAMeS/tree/main
