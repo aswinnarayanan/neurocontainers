@@ -1,9 +1,9 @@
 variables:
-  r_version: 4.5.3
+  r_version: "4.6.1"
   irkernel_version: 1.3.2
 
 name: irkernel
-version: 4.4.3
+version: "4.5.0"
 copyright:
   - license: GPL-2.0-or-later
     url: https://www.r-project.org/Licenses/
