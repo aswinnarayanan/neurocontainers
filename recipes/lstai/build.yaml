@@ -4,7 +4,7 @@ variables:
   hdbet_version: '1.1'
 
 name: lstai
-version: 1.1.0
+version: "1.2.0"
 copyright:
   - license: MIT
     url: https://github.com/CompImg/LST-AI/blob/main/LICENSE
@@ -90,8 +90,8 @@ files:
     url: https://github.com/CompImg/LST-AI/releases/download/v1.1.0/lst_data.zip
     sha256: c2409747ee6c3cb474c004d77812227a276e7ee4caa0648984a30d9cf5bd3ee3
   - name: dcm2niix_lnx_zip
-    url: https://github.com/rordenlab/dcm2niix/releases/download/v1.0.20240202/dcm2niix_lnx.zip
-    sha256: 269debc463857a999a9b48f677218dae287b58f5300f161d7fad284116a6321b
+    url: "https://github.com/rordenlab/dcm2niix/releases/download/v1.0.20260724/dcm2niix_lnx.zip"
+    sha256: "2916a7bc64511eb20fb976a994799183cc1bfdd03395bf5d8edef54a58dee06f"
   - name: 0_model
     url: https://zenodo.org/record/2540695/files/0.model?download=1
     sha256: 6f75233753c4750672815e2b7a86db754995ae44b8f1cd77bccfc37becd2d83c
