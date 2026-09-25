@@ -2,11 +2,11 @@ variables:
   openrecon_server_commit: "33362f2139701fbf5ea855808a325eb59b7db2ae"
   openrecon_python_tools_commit: "17fe6fbf1bb645112e2ad0023eb4f42afb36421e"
   openrecon_siemens_commit: "055eefc09dfa77fbf11fff85979dea9ef2879ba5"
-  openrecon_ismrmrd_version: "1.14.2"
+  openrecon_ismrmrd_version: "1.15.0"
   upstream_version: 4.0.1
 
 name: meica
-version: 4.0.1
+version: "4.1.0"
 copyright:
   - license: CC-BY-NC-SA-4.0
     url: https://github.com/ME-ICA/me-ica/blob/{{ context.upstream_version }}/LICENSE
