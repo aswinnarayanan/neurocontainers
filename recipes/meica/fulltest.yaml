@@ -2,7 +2,7 @@
 # Exercises the packaged CLI/runtime and the OpenRecon image bridge.
 
 name: meica
-version: 4.0.1
+version: "4.1.0"
 
 test_data:
   output_dir: test_output
