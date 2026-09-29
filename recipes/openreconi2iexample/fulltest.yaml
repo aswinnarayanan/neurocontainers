@@ -2,7 +2,7 @@
 # Focused verification for the wrapper, OpenRecon runtime, and declared assets.
 
 name: openreconi2iexample
-version: 1.0.89
+version: "1.1.0"
 
 test_data:
   output_dir: test_output
