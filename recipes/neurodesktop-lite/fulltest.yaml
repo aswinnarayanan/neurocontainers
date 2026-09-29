@@ -3,9 +3,9 @@
 # on-demand JupyterLab, CVMFS-backed NeuroDesk tooling, and workflow utilities.
 
 name: neurodesktop-lite
-version: "20260428.1.0"
-claude_version: 2.1.263
-apptainer_version: 1.4.4
+version: "20260428.2.0"
+claude_version: "2.1.284"
+apptainer_version: "1.5.4"
 ipywidgets_version: 8.1.9
 jupyterlab_widgets_version: 3.0.17
 nb_conda_kernels_version: 2.5.1
