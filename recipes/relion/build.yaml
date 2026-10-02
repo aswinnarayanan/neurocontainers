@@ -1,5 +1,5 @@
 name: relion
-version: 4.0.1.sm75
+version: "4.1.0-sm75"
 
 copyright:
   - license: GPL-2.0-only
@@ -12,7 +12,7 @@ variables:
   install_version: "4.0.1.sm75"
   relion_version: "4.0.1"
   compute_capability: "75"
-  relion_commit: "ec417f5b36ce847c003723a51267116dc0a0c7ee"
+  relion_commit: "e18cc7713395153cc70df8817ad270dfcc3746f6"
   ctffind_version: 4.1.14
   motioncor2_version: 1.6.4
   cuda_version: "11.8"
