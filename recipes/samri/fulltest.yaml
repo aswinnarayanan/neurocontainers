@@ -1,5 +1,5 @@
 name: samri
-version: "0.5"
+version: "0.5.4"
 
 tests:
   - name: SAMRI command line help
