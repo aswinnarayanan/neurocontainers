@@ -2,7 +2,7 @@
 # Focused verification for the OpenRecon runtime and gridding dependencies.
 
 name: sodiumgridding
-version: 0.1.6
+version: "0.2.0"
 
 test_data:
   output_dir: test_output
