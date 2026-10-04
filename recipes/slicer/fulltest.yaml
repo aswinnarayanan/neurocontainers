@@ -15,7 +15,7 @@
 
 monailabel_version: 0.8.5
 name: slicer
-version: 5.10.0
+version: "5.11.0"
 
 required_files:
   - dataset: ds000001
@@ -532,5 +532,5 @@ cleanup:
     # Optionally remove test outputs
     # rm -rf test_output
     echo "Test outputs preserved in test_output/"
-upstream_version: 5.10.0
-slicer_abi: '5.10'
+upstream_version: "5.12.4"
+slicer_abi: "5.12"
