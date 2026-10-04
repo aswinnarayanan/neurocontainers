@@ -2,7 +2,7 @@
 # Focused verification for OpenRecon runtime assets and sodium NUFFT imports.
 
 name: sodiumnufft
-version: 0.1.10
+version: "0.2.0"
 
 test_data:
   output_dir: test_output
