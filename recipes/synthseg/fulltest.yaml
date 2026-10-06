@@ -12,7 +12,7 @@
 # runners; every other test is a fast asset/interface check.
 
 name: synthseg
-version: 8.2.0
+version: "8.3.0"
 
 required_files:
   - dataset: ds000001
@@ -189,4 +189,4 @@ tests:
       print(\"segmentation ok, distinct labels:\", labels.size)
       "'
     expected_output_contains: "segmentation ok"
-upstream_version: 8.2.0
+upstream_version: "8.2.0"
