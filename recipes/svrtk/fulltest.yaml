@@ -1,5 +1,5 @@
 name: svrtk
-version: "20260626"
+version: "20260626.1.0"
 default_timeout: 120
 
 tests:
