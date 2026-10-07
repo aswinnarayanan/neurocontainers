@@ -1,5 +1,5 @@
 name: template
-version: 1.1.5
+version: "1.2.0"
 
 copyright:
   - license: MIT
@@ -12,7 +12,7 @@ copyright:
 architectures:
 - x86_64
 variables:
-  base_image_digest: sha256:bc694492031b8ec54b86f338766ccbc0353f961669de65b1ad53857d6c275158
+  base_image_digest: "sha256:460fc53c6128ede1f22825ebfaca9d9df82c2f4601a1d9a18e83e6869b951a8b"
 
 auto_update:
   method: sources
