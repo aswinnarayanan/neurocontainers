@@ -7,7 +7,7 @@
 # Tests focus on the packaged runtime and documented example command.
 
 name: workshopdemo
-version: 1.0.0
+version: "1.1.0"
 
 setup:
   script: |
