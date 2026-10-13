@@ -19,7 +19,7 @@
 #   - BOLD: functional MRI timeseries
 
 name: deepretinotopy
-version: 1.0.19
+version: 1.1.0
 
 required_files:
   - dataset: ds000001
