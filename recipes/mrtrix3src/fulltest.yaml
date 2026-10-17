@@ -1,5 +1,5 @@
 name: mrtrix3src
-version: latest
+version: "1.0.0"
 default_timeout: 60
 tests:
 - name: mrconvert resolves on PATH
