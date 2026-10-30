@@ -1,5 +1,5 @@
 name: tgvqsm
-version: 1.0.0
+version: "1.1.0"
 
 architectures:
   - x86_64
@@ -137,7 +137,7 @@ variables:
   cmake_version: "3.31.12"
   upstream_version: 1.0.0
   bet2_revision: adec315977486917d995ae2d1449f3efc616e2bc
-  dcm2niix_version: "v1.0.20260724"
+  dcm2niix_version: "v1.0.20261029"
 files:
 - name: cmake
   url: https://github.com/Kitware/CMake/releases/download/v{{ context.cmake_version }}/cmake-{{ context.cmake_version }}-linux-x86_64.tar.gz

@@ -1,4 +1,4 @@
-dcm2niix_version: v1.0.20260724
+dcm2niix_version: "v1.0.20261029"
 # tgvqsm container test suite
 # Tests for TGV-QSM v1.0.0 - Quantitative Susceptibility Mapping with Total Generalized Variation
 #
@@ -18,7 +18,7 @@ dcm2niix_version: v1.0.20260724
 # data from a QSM-specific acquisition protocol.
 
 name: tgvqsm
-version: 1.0.0
+version: "1.1.0"
 
 required_files:
   - dataset: ds000001
