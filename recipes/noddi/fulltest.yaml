@@ -1,5 +1,5 @@
 name: noddi
-version: '1.0'
+version: "1.1.0"
 default_timeout: 120
 tests:
 - name: NODDI wrapper usage
@@ -41,4 +41,4 @@ tests:
     fi
     echo "NODDI MATLAB Runtime launcher reached application code"
 upstream_version: '1.0'
-matlab_version: 2020b
+matlab_version: "2020b"
